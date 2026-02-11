@@ -1,8 +1,8 @@
-const puppeteer = require('puppeteer-core')
 const chromium = require('@sparticuz/chromium')
+const puppeteer = require('puppeteer-core')
 const { performance } = require('perf_hooks')
 
-module.exports = async function bypassLink4Sub(url) {
+module.exports = async function link4sub(url) {
   const start = performance.now()
   let browser
 
@@ -10,7 +10,8 @@ module.exports = async function bypassLink4Sub(url) {
     browser = await puppeteer.launch({
       args: chromium.args,
       executablePath: await chromium.executablePath(),
-      headless: chromium.headless
+      headless: true,
+      defaultViewport: chromium.defaultViewport
     })
 
     const page = await browser.newPage()
