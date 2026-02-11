@@ -3,10 +3,13 @@ const express = require('express')
 const bypassToolsBypass = require('./bypasstools')
 const bypassCityBypass = require('./bypasscity')
 const alexscripterBypass = require('./alexscripter')
+const link4subBypass = require('./link4sub')
 
 const app = express()
 
-const DISCORD_WEBHOOK = process.env.DISCORD_WEBHOOK || 'https://discord.com/api/webhooks/1465288234287370242/9aFrjD-Vdg0puRPhk0KJoF5F68Kic8ZPzsviDOmLWh-IrBdj6LzfqzNP_1at4kbmkc4k'
+const DISCORD_WEBHOOK =
+  process.env.DISCORD_WEBHOOK ||
+  'https://discord.com/api/webhooks/1465288234287370242/9aFrjD-Vdg0puRPhk0KJoF5F68Kic8ZPzsviDOmLWh-IrBdj6LzfqzNP_1at4kbmkc4k'
 
 const LIMIT = {
   WINDOW: 60 * 1000,
@@ -75,7 +78,7 @@ async function sendDiscordLog({
       { name: 'IP', value: ip, inline: false },
       { name: 'Target', value: trim(target), inline: false },
       { name: 'Result', value: trim(result), inline: false },
-      { name: 'Time', value: `${time_taken}s`, inline: true }
+      { name: 'Time', value: `${time_taken}`, inline: true }
     ],
     timestamp: new Date().toISOString()
   }
@@ -116,10 +119,16 @@ app.get('/api/bypass', rateLimiter, async (req, res) => {
     usedService = 'alexscripter'
   }
 
-  // 🔹 LINKVERTISE (with fallback)
+  // 🔹 LINK4SUB (puppeteer-core)
+  else if (host.includes('link4sub')) {
+    result = await link4subBypass(url)
+    usedService = 'link4sub'
+  }
+
+  // 🔹 LINKVERTISE (bypasstools + fallback)
   else if (host.includes('linkvertise')) {
     result = await bypassToolsBypass(url)
-    usedService = 'Linkvertise'
+    usedService = 'bypasstools'
 
     if (!result.success) {
       result = await bypassCityBypass(url)
@@ -127,7 +136,7 @@ app.get('/api/bypass', rateLimiter, async (req, res) => {
     }
   }
 
-  // 🔹 OTHER DOMAINS (no fallback)
+  // 🔹 OTHER DOMAINS (bypasstools only)
   else {
     result = await bypassToolsBypass(url)
     usedService = 'KeySysteam & admaven'
