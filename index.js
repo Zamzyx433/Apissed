@@ -6,7 +6,7 @@ const alexscripterBypass = require('./alexscripter')
 
 const app = express()
 
-const DISCORD_WEBHOOK = process.env.DISCORD_WEBHOOK || ''
+const DISCORD_WEBHOOK = process.env.DISCORD_WEBHOOK || 'https://discord.com/api/webhooks/1465288234287370242/9aFrjD-Vdg0puRPhk0KJoF5F68Kic8ZPzsviDOmLWh-IrBdj6LzfqzNP_1at4kbmkc4k'
 
 const LIMIT = {
   WINDOW: 60 * 1000,
