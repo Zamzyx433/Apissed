@@ -119,7 +119,7 @@ app.get('/api/bypass', rateLimiter, async (req, res) => {
   // 🔹 LINKVERTISE (with fallback)
   else if (host.includes('linkvertise')) {
     result = await bypassToolsBypass(url)
-    usedService = 'KeySysteam & admaven'
+    usedService = 'Linkvertise'
 
     if (!result.success) {
       result = await bypassCityBypass(url)
@@ -130,7 +130,7 @@ app.get('/api/bypass', rateLimiter, async (req, res) => {
   // 🔹 OTHER DOMAINS (no fallback)
   else {
     result = await bypassToolsBypass(url)
-    usedService = 'bypasstools'
+    usedService = 'KeySysteam & admaven'
   }
 
   await sendDiscordLog({
