@@ -119,7 +119,7 @@ app.get('/api/bypass', rateLimiter, async (req, res) => {
   // 🔹 LINKVERTISE (with fallback)
   else if (host.includes('linkvertise')) {
     result = await bypassToolsBypass(url)
-    usedService = 'bypasstools'
+    usedService = 'KeySysteam & admaven'
 
     if (!result.success) {
       result = await bypassCityBypass(url)
