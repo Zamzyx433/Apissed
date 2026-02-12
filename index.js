@@ -107,7 +107,7 @@ app.get('/supported', (req, res) => {
     "alexscripter.site",
     "neoxsoftworks.eu",
     "link4sub.com",
-    "linkvertise.com",
+    "linkvertise.com (All)",
     "rekonise.com",
     "rkns.link",
     "work.ink",
@@ -117,9 +117,19 @@ app.get('/supported', (req, res) => {
     "link-center.net",
     "direct-link.net",
     "link-target.net",
-    "boost.ink",
+    "boost.ink (all)",
     "go.linkify.ru",
-    "bit.ly"
+    "bit.ly",
+    "ez4short.com",
+    "shrtlink.net",
+    "Lootlabs (all)",
+    "Lootlink",
+    "Paster.so",
+    "Fc.lc",
+    "ReLink.cc",
+    "Exe.io",
+    "ShrinkMe.io",
+    "shrinkme.click"
   ]
 
   res.json({
