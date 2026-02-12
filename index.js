@@ -116,7 +116,9 @@ app.get('/supported', (req, res) => {
     "link-hub.net",
     "link-center.net",
     "direct-link.net",
-    "link-target.net"
+    "link-target.net",
+    "boost.ink",
+    "go.linkify.ru"
   ]
 
   res.json({
