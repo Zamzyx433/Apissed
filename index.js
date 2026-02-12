@@ -6,6 +6,7 @@ const alexscripterBypass = require('./alexscripter')
 const link4subBypass = require('./link4sub')
 const neoxBypass = require('./neox')
 const rebrandlyBypass = require('./rebrandly')
+const ytsubmeBypass = require('./ytsubme')
 
 const app = express()
 
@@ -132,7 +133,8 @@ app.get('/supported', (req, res) => {
     "ShrinkMe.io",
     "rebrand.ly",
     "tinyurl.com",
-    "v.gd"
+    "v.gd",
+    "ytsubme"
   ]
 
   res.json({
@@ -167,6 +169,11 @@ app.get('/api/bypass', rateLimiter, async (req, res) => {
     usedService = 'alexscripter'
   }
 
+  else if (host.includes('ytsubme') || host.includes('bit.ly')) {
+  result = await ytsubmeBypass(url)
+  usedService = 'ytsubme'
+   }
+   
   else if (host.includes('rebrand.ly')) {
   result = await rebrandlyBypass(url)
   usedService = 'rebrandly'
