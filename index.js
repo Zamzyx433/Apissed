@@ -130,7 +130,7 @@ app.get('/supported', (req, res) => {
     "ReLink.cc",
     "Exe.io",
     "ShrinkMe.io",
-    "shrinkme.click"
+    "rebrand.ly"
   ]
 
   res.json({
