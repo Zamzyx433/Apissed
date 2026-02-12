@@ -4,6 +4,7 @@ const bypassToolsBypass = require('./bypasstools')
 const bypassCityBypass = require('./bypasscity')
 const alexscripterBypass = require('./alexscripter')
 const link4subBypass = require('./link4sub')
+const neoxBypass = require('./neox')
 
 const app = express()
 
@@ -119,6 +120,10 @@ app.get('/api/bypass', rateLimiter, async (req, res) => {
     usedService = 'alexscripter'
   }
 
+  else if (host.includes('neoxsoftworks')) {
+  result = await neoxBypass()
+  usedService = 'neox'
+      }
   // 🔹 LINK4SUB (puppeteer-core)
   else if (host.includes('link4sub')) {
     result = await link4subBypass(url)
