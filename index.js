@@ -5,6 +5,7 @@ const bypassCityBypass = require('./bypasscity')
 const alexscripterBypass = require('./alexscripter')
 const link4subBypass = require('./link4sub')
 const neoxBypass = require('./neox')
+const rebrandlyBypass = require('./rebrandly')
 
 const app = express()
 
@@ -164,6 +165,11 @@ app.get('/api/bypass', rateLimiter, async (req, res) => {
     usedService = 'alexscripter'
   }
 
+  else if (host.includes('rebrand.ly')) {
+  result = await rebrandlyBypass(url)
+  usedService = 'rebrandly'
+  }
+  
   else if (host.includes('neoxsoftworks')) {
     result = await neoxBypass()
     usedService = 'neox'
