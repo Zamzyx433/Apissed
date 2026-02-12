@@ -118,7 +118,8 @@ app.get('/supported', (req, res) => {
     "direct-link.net",
     "link-target.net",
     "boost.ink",
-    "go.linkify.ru"
+    "go.linkify.ru",
+    "bit.ly"
   ]
 
   res.json({
