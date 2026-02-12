@@ -97,6 +97,38 @@ app.get('/', (req, res) => {
   res.json({ success: true, message: 'API RUNNING' })
 })
 
+/* ===============================
+   SUPPORTED SERVICES
+================================ */
+app.get('/supported', (req, res) => {
+  const start = Date.now()
+
+  const services = [
+    "alexscripter.site",
+    "neoxsoftworks.eu",
+    "link4sub.com",
+    "linkvertise.com",
+    "rekonise.com",
+    "rkns.link",
+    "work.ink",
+    "worink.net",
+    "shrinkme.click",
+    "link-hub.net",
+    "link-center.net",
+    "direct-link.net",
+    "link-target.net"
+  ]
+
+  res.json({
+    status: "success",
+    services,
+    time: ((Date.now() - start) / 1000).toFixed(2)
+  })
+})
+
+/* ===============================
+   MAIN BYPASS ROUTE
+================================ */
 app.get('/api/bypass', rateLimiter, async (req, res) => {
   const { url } = req.query
   const ip =
@@ -114,23 +146,21 @@ app.get('/api/bypass', rateLimiter, async (req, res) => {
   let result
   let usedService
 
-  // 🔹 ALEX SCRIPTER
   if (host.includes('alexscripter')) {
     result = await alexscripterBypass(url)
     usedService = 'alexscripter'
   }
 
   else if (host.includes('neoxsoftworks')) {
-  result = await neoxBypass()
-  usedService = 'neox'
-      }
-  // 🔹 LINK4SUB (puppeteer-core)
+    result = await neoxBypass()
+    usedService = 'neox'
+  }
+
   else if (host.includes('link4sub')) {
     result = await link4subBypass(url)
     usedService = 'link4sub'
   }
 
-  // 🔹 LINKVERTISE (bypasstools + fallback)
   else if (host.includes('linkvertise')) {
     result = await bypassToolsBypass(url)
     usedService = 'bypasstools'
@@ -141,7 +171,6 @@ app.get('/api/bypass', rateLimiter, async (req, res) => {
     }
   }
 
-  // 🔹 OTHER DOMAINS (bypasstools only)
   else {
     result = await bypassToolsBypass(url)
     usedService = 'KeySysteam & admaven'
